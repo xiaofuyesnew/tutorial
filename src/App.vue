@@ -1,5 +1,13 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+
+axios({
+  url: '/api'
+}).then(res => {
+  console.log(res)
+})
+
 </script>
 
 <template>
