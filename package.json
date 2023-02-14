@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "vercel:dev": "vite | npx vercel dev",
     "build": "vite build",
     "preview": "vite preview"
   },
