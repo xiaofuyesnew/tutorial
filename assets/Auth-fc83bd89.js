@@ -1,0 +1,1 @@
+import{a as t}from"./axios-08622986.js";import{u as a,o as u,a as r,c as s}from"./index-ec83826e.js";const i={__name:"Auth",setup(n){const o=a();return console.log(o.query),u(()=>{window.authCode=o.query.code,t({url:"/api/user/auth",method:"post",data:{code:o.query.code}}).then(e=>{console.log(e)})}),(e,c)=>(r(),s("div",null,"authorizing..."))}};export{i as default};

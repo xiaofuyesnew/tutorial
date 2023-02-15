@@ -1,0 +1,1 @@
+import{a as s}from"./axios-08622986.js";import{r as a,o as r,a as o,c,t as n}from"./index-ec83826e.js";const i={class:"w-screen h-screen flex items-center justify-center"},u={__name:"Home",setup(m){const t=a({msg:""});return r(()=>{s({url:"https://tutorial-navy.vercel.app/api/test"}).then(e=>{t.msg=e.data.msg})}),(e,p)=>(o(),c("div",i,n(t.msg),1))}};export{u as default};
