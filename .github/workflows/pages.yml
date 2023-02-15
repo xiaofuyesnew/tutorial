@@ -39,6 +39,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Inject Github env
+        run: echo 'VITE_GITHUB=true' >> .env.production
+
       - name: Install dependencies
         run: pnpm install
 
