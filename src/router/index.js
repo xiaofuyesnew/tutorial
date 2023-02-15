@@ -1,26 +1,24 @@
-import { createRouter, createWebHistory } from 'vue-router'
-
-const prefix = import.meta.env.VITE_GITHUB ? '/tutorial' : ''
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: `${prefix}/`,
+    path: `/`,
     name: 'Home',
     component: () => import('@/pages/Home.vue')
   },
   {
-    path: `${prefix}/login`,
+    path: `/login`,
     name: 'Login',
     component: () => import('@/pages/Login.vue')
   },
   {
-    path: `${prefix}/auth`,
+    path: `/auth`,
     name: 'Auth',
     component: () => import('@/pages/Auth.vue')
   }
 ]
 
 export default createRouter({
-  history: createWebHistory(),
+  history: import.meta.env.VITE_GITHUB ? createWebHashHistory() : createWebHistory(),
   routes
 })
