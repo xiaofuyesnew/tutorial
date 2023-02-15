@@ -1,4 +1,4 @@
-# Rename this file to .env.local
+# Rename this file to .env
 # change <database name> to real one
 # this bring an environment variable DATABASE_URL for using with pscale cli to push database schema to planetscale under development.
 # use pscale cli: pscale connect <database name> <branch name> --port 3309
