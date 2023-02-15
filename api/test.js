@@ -1,14 +1,13 @@
 import axios from 'axios'
 
 export default async (req, res) => {
-  axios({
+  const result = await axios({
     method: 'get',
     url: 'http://www.weather.com.cn/data/sk/101190408.html'
-  }).then(result => {
-    console.log(result)
   })
 
-  res.status(200).json({
-    msg: 'request successful'
+  res.status(200).send({
+    msg: 'request successful',
+    data: result.data
   })
 }

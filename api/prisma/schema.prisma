@@ -11,8 +11,21 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum EnrolType {
+  EMAIL
+  GITHUB
+}
+
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id         Int       @id @default(autoincrement())
+  userName   String    @unique
+  password   String
+  email      String    @unique
+  githubId   Int       @unique
+  name       String
+  avatar     String
+  bio        String
+  enrol_type EnrolType
+  createAt   String
+  updateAt   String
 }
