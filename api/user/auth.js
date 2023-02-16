@@ -24,32 +24,34 @@ export default async (req, res) => {
 
   console.log(userInfo)
 
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: userInfo.email
-      }
-    })
-
-    if (user === null) {
-      const data = {
-        userName: userInfo.login,
-        email: userInfo.email,
-        githubId: userInfo.id,
-        name: userInfo.name,
-        avatar: userInfo.avatar_url,
-        enrolType: 'GITHUB',
-        createAt: day().format('YYYY-MM-DD HH:mm:ss')
-      }
-      // console.log(data)
-      const userCreated = await prisma.user.create({ data })
-
-      // console.log(userCreated)
-      res.status(200).send({ msg: 'create user', data: userCreated })
-    } else {
-      res.status(200).send({ msg: 'user has been existed', data: user })
+  // try {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: userInfo.email
     }
-  } catch (e) {
-    res.status(500).send({ err: e.message })
+  })
+
+  console.log(user)
+
+  if (user === null) {
+    const data = {
+      userName: userInfo.login,
+      email: userInfo.email,
+      githubId: userInfo.id,
+      name: userInfo.name,
+      avatar: userInfo.avatar_url,
+      enrolType: 'GITHUB',
+      createAt: day().format('YYYY-MM-DD HH:mm:ss')
+    }
+    console.log(data)
+    const userCreated = await prisma.user.create({ data })
+
+    console.log(userCreated)
+    res.status(200).send({ msg: 'create user', data: userCreated })
+  } else {
+    res.status(200).send({ msg: 'user has been existed', data: user })
   }
+  // } catch (e) {
+  //   res.status(500).send({ err: e.message })
+  // }
 }
