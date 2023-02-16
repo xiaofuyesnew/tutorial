@@ -12,7 +12,7 @@ const route = useRoute()
 console.log(route.query)
 
 onMounted(() => {
-  window.authCode = route.query.code
+  // window.authCode = route.query.code
 
   axios({
     url: '/api/user/auth',
@@ -22,6 +22,8 @@ onMounted(() => {
     }
   }).then(res => {
     console.log(res)
+    window.user = res.data
+    window.close()
   })
 })
 

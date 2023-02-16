@@ -12,6 +12,13 @@
     >
       auth
     </div>
+    <div
+      class="w-[100px] h-[60px] flex items-center justify-center bg-black text-white cursor-pointer"
+      @click="addUser"
+    >
+      add
+    </div>
+    <div>{{ state.user }}</div>
   </div>
 </template>
 
@@ -21,12 +28,14 @@ import { reactive } from 'vue'
 
 const state = reactive({
   win: null,
-  timer: null
+  timer: null,
+  user: null
 })
 
 const checkWin = () => {
   console.log('checking')
   console.log(state.win.authCode)
+  console.log(state.win.user)
   if (state?.win.closed) {
     state.timer = null
   } else {
@@ -52,4 +61,14 @@ const authUser = () => {
     console.log(res)
   })
 }
+
+const addUser = () => {
+  axios({
+    url: '/api/user/add'
+  }).then(res => {
+    console.log(res)
+    state.user = res.data
+  })
+}
+
 </script>
