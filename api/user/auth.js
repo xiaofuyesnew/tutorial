@@ -41,10 +41,10 @@ export default async (req, res) => {
         enrolType: 'GITHUB',
         createAt: day().format('YYYY-MM-DD HH:mm:ss')
       }
-      console.log(data)
+      // console.log(data)
       const userCreated = await prisma.user.create({ data })
 
-      console.log(userCreated)
+      // console.log(userCreated)
       res.status(200).send({ msg: 'create user', data: userCreated })
     } else {
       res.status(200).send({ msg: 'user has been existed', data: user })
