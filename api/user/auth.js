@@ -14,7 +14,7 @@ export default async (req, res) => {
     }
   }).json()
 
-  console.log(result)
+  // console.log(result)
 
   const userInfo = await got.get('https://api.github.com/user', {
     headers: {
@@ -22,36 +22,36 @@ export default async (req, res) => {
     }
   }).json()
 
-  console.log(userInfo)
+  // console.log(userInfo)
 
-  // try {
-  const user = await prisma.user.findUnique({
-    where: {
-      email: userInfo.email
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: userInfo.email
+      }
+    })
+
+    console.log(user)
+
+    if (user === null) {
+      const data = {
+        userName: userInfo.login,
+        email: userInfo.email,
+        githubId: userInfo.id,
+        name: userInfo.name,
+        avatar: userInfo.avatar_url,
+        enrolType: 'GITHUB',
+        createAt: day().format('YYYY-MM-DD HH:mm:ss')
+      }
+      console.log(data)
+      const userCreated = await prisma.user.create({ data })
+
+      console.log(userCreated)
+      res.status(200).send({ msg: 'create user', data: userCreated })
+    } else {
+      res.status(200).send({ msg: 'user has been existed', data: user })
     }
-  })
-
-  console.log(user)
-
-  if (user === null) {
-    const data = {
-      userName: userInfo.login,
-      email: userInfo.email,
-      githubId: userInfo.id,
-      name: userInfo.name,
-      avatar: userInfo.avatar_url,
-      enrolType: 'GITHUB',
-      createAt: day().format('YYYY-MM-DD HH:mm:ss')
-    }
-    console.log(data)
-    const userCreated = await prisma.user.create({ data })
-
-    console.log(userCreated)
-    res.status(200).send({ msg: 'create user', data: userCreated })
-  } else {
-    res.status(200).send({ msg: 'user has been existed', data: user })
+  } catch (e) {
+    res.status(500).send({ err: e.message })
   }
-  // } catch (e) {
-  //   res.status(500).send({ err: e.message })
-  // }
 }
